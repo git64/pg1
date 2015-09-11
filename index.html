@@ -31,10 +31,12 @@
  
  <script>
  
- $( document ).on( "pageinit", "#home", function() {
-	  
+ $(document).on("pagecreate", "#home", onDeviceReady);
+ 
+ 
+ function onDeviceReady(event, ui) {
 	 
-	    $( document ).on( "swiperight", "#home", function( e ) {
+	 $( document ).on( "swiperight", "#home", function( e ) {
 	        // We check if there is no open panel on the page because otherwise
 	        // a swipe to close the left panel would also open the right panel (and v.v.).
 	        // We do this by checking the data that the framework stores on the page element (panel: open).
@@ -46,12 +48,43 @@
 	            }
 	        }
 	    });
-	    
-	    $("#button1").click( function() {
-			alert('button clicked');
-	    });
-	    
-	});
+	 
+	 
+	 $("#button1").click( function() {
+		
+		 var w = window.open('about:blank','_system');
+		    w.document.write(data);
+		    w.document.close();
+		 
+// 		 $.post("http://www.w3schools.com/jquery/demo_test_post.asp",
+// 			        {
+// 			          name: "Donald Duck",
+// 			          city: "Duckburg"
+// 			        },
+// 			        function(data,status){
+// 			            alert("Data: " + data + "\nStatus: " + status);
+// 			        });
+		 
+// 		 alert('button clicked');
+		 
+		 
+// 		 $.post("http://fahrplaner.bsag.de/hafas/query.exe/dn?", { REQ0JourneyStopsS0A: "1", S: "Bremen&nbsp;Sch&uuml;sselkorb" },function (data) {
+// 			 alert(data);   
+// 			 var w = window.open('about:blank','_system');
+// 			    w.document.write(data);
+// 			    w.document.close();
+// 			});
+		 
+
+		 
+	   });
+	 
+	 
+ }
+ 
+function onTest() {
+	alert('button clicked');
+}
 
 </script>
  
@@ -71,6 +104,8 @@
 		<!-- panel -->
 		<div data-role="panel" id="mypanel">
 	        <!-- panel content goes here -->
+	        
+	        <a id="button1" href="index.html" data-role="button">Link button</a>
 	        
 	        <form data-ajax="false" action="http://fahrplaner.bsag.de/hafas/query.exe/dn?" target="_system" method="post" name="fahrplanauskunft" id="fahrplanauskunft" class="row">
             
