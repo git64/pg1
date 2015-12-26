@@ -42,13 +42,8 @@
 	   // Stop form from submitting normally
 	   event.preventDefault();
 	  
-	   // Get some values from elements on the page:
-	   var $form = $( this ),
-	     term = $form.find( "input[name='s']" ).val(),
-	     url = $form.attr( "action" );
-	  
 	   // Send the data using post
-	   var posting = $.post( 'http://fahrplaner.bsag.de/hafas/query.exe/dn/', { S: 'Bremen Schüsselkorb', Z: 'Bremen Kirchweg' } );
+	   var posting = $.post( 'http://fahrplaner.bsag.de/hafas/query.exe/dn/', $( "#fahrplanauskunft" ).serialize() );
 	  
 	   // Put the results in a div
 	   posting.done(function( data ) {
