@@ -36,6 +36,31 @@
  
  function onDeviceReady(event, ui) {
 	 
+	// Attach a submit handler to the form
+	 $( "#fahrplanauskunft" ).submit(function( event ) {
+	  
+	   // Stop form from submitting normally
+	   event.preventDefault();
+	  
+	   // Get some values from elements on the page:
+	   var $form = $( this ),
+	     term = $form.find( "input[name='s']" ).val(),
+	     url = $form.attr( "action" );
+	  
+	   // Send the data using post
+	   var posting = $.post( 'http://fahrplaner.bsag.de/hafas/query.exe/dn', { S: 'Bremen&nbsp;Sch&uuml;sselkorb' } );
+	  
+	   // Put the results in a div
+	   posting.done(function( data ) {
+	     //var content = $( data ).find( "#content" );
+	     $( "#result" ).empty().append( data );
+	   });
+	 });
+
+	 
+	 
+	 
+	 
 	 $( document ).on( "swiperight", "#home", function( e ) {
 	        // We check if there is no open panel on the page because otherwise
 	        // a swipe to close the left panel would also open the right panel (and v.v.).
@@ -82,6 +107,10 @@
 	 
  }
  
+ 
+ 
+ 
+ 
 function onTest() {
 	alert('button clicked');
 }
@@ -106,6 +135,7 @@ function onTest() {
 	        <!-- panel content goes here -->
 	        
 	        <a id="button1" href="index.html" data-role="button">Link button</a>
+	        
 	        
 	        <form action="http://fahrplaner.bsag.de/hafas/query.exe/dn?" rel="external" target="_blank" method="post" name="fahrplanauskunft" id="fahrplanauskunft" class="row">
             
@@ -132,6 +162,7 @@ function onTest() {
     	<!-- content -->
     	<div data-role="content">
       		<a href="#mypanel">Open ppp</a>
+      	    <div id="result"></div>
     	</div>
     	
     	<!-- footer -->
