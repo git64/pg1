@@ -43,7 +43,7 @@
 	   event.preventDefault();
 	  
 	   // Send the data using post
-	   var posting = $.post( 'http://fahrplaner.bsag.de/hafas/query.exe/dn/', $( "#fahrplanauskunft" ).serialize() );
+	   var posting = $.post( 'http://fahrplaner.bsag.de/hafas/query.exe/dn?', $( "#fahrplanauskunft" ).serialize() );
 	  
 	   // Put the results in a div
 	   posting.done(function( data ) {
